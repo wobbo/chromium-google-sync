@@ -63,9 +63,11 @@ Clone the repository:
 ```bash
 git clone https://github.com/wobbo/chromium-google-sync.git
 cd chromium-google-sync
-chmod +x enable-chromium-google-sync.sh remove-chromium-google-sync.sh
-./enable-chromium-google-sync.sh
+chmod +x enable-chromium-google-sync remove-chromium-google-sync
+./enable-chromium-google-sync
 ```
+
+The scripts intentionally have no filename extension. On Linux that is perfectly normal for executable scripts and keeps the commands short.
 
 Start the installer **without** `sudo`.
 
@@ -92,7 +94,7 @@ chrome://policy
 Run:
 
 ```bash
-./remove-chromium-google-sync.sh
+./remove-chromium-google-sync
 ```
 
 The remover deletes only the configuration files installed by this project.
