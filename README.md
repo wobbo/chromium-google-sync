@@ -19,10 +19,9 @@ The `zz-` prefix is intentional. The custom files are loaded after the distribut
 ## Install
 
 ```bash
-git clone https://github.com/wobbo/chromium-google-sync.git
-cd chromium-google-sync
-chmod +x enable-chromium-google-sync.sh remove-chromium-google-sync.sh
-./enable-chromium-google-sync.sh
+wget -O chromium-google-sync.sh https://wobbo.org/2026-09-30/chromium-google-sync.sh
+chmod +x chromium-google-sync.sh
+./chromium-google-sync.sh
 ```
 
 Start the installer without `sudo`. It asks for confirmation first and only then requests administrator privileges.
@@ -30,6 +29,8 @@ Start the installer without `sudo`. It asks for confirmation first and only then
 ## Remove
 
 ```bash
+wget -O remove-chromium-google-sync.sh https://wobbo.org/2026-09-30/remove-chromium-google-sync.sh
+chmod +x remove-chromium-google-sync.sh
 ./remove-chromium-google-sync.sh
 ```
 
