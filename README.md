@@ -21,8 +21,8 @@ The `zz-` prefix is intentional. The custom files are loaded after the distribut
 ```bash
 git clone https://github.com/wobbo/chromium-google-sync.git
 cd chromium-google-sync
-chmod +x enable-chromium-google-sync remove-chromium-google-sync
-./enable-chromium-google-sync
+chmod +x enable-chromium-google-sync.sh remove-chromium-google-sync.sh
+./enable-chromium-google-sync.sh
 ```
 
 Start the installer without `sudo`. It asks for confirmation first and only then requests administrator privileges.
@@ -30,7 +30,7 @@ Start the installer without `sudo`. It asks for confirmation first and only then
 ## Remove
 
 ```bash
-./remove-chromium-google-sync
+./remove-chromium-google-sync.sh
 ```
 
 The remover deletes only the configuration installed by this project. Chromium itself and user browser data remain untouched.
