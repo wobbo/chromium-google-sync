@@ -1,0 +1,76 @@
+#!/bin/bash
+set -euo pipefail
+
+# ============================================================
+# Remove Chromium Google Services / Sync
+# ============================================================
+#
+# Removes only the configuration installed by this project.
+# Chromium itself and personal browser data remain untouched.
+# ============================================================
+
+echo "=================================================="
+echo " Remove Chromium Google Services / Sync"
+echo "=================================================="
+echo
+echo "This removes only the system-wide Google Sync"
+echo "configuration added by this project."
+echo "Chromium itself and user browser data remain."
+echo "All running Chromium windows will be closed."
+echo
+
+# Ask before making changes.
+read -r -p "Remove Google services configuration from Chromium? [y/N]: " answer
+case "$answer" in
+    y|Y|yes|YES|Yes) ;;
+    *)
+        echo
+        echo "Removal cancelled."
+        exit 0
+        ;;
+esac
+
+# Request administrator privileges only after confirmation.
+if [ "$EUID" -eq 0 ]; then
+    SUDO=()
+else
+    if ! command -v sudo >/dev/null 2>&1; then
+        echo "ERROR: sudo is not installed."
+        exit 1
+    fi
+    echo
+    echo "Administrator privileges are required."
+    sudo -v
+    SUDO=(sudo)
+fi
+
+# Stop Chromium before removing startup configuration.
+echo
+echo "Stopping all running Chromium processes..."
+"${SUDO[@]}" pkill -TERM -x chromium 2>/dev/null || true
+"${SUDO[@]}" pkill -TERM -x chromium-browser 2>/dev/null || true
+sleep 2
+"${SUDO[@]}" pkill -KILL -x chromium 2>/dev/null || true
+"${SUDO[@]}" pkill -KILL -x chromium-browser 2>/dev/null || true
+
+# Remove only files installed by this project.
+echo
+echo "Removing Google OAuth configuration..."
+"${SUDO[@]}" rm -f /etc/chromium.d/zz-google-sync
+
+echo "Removing Chromium profile compatibility support..."
+"${SUDO[@]}" rm -f /etc/chromium.d/zz-google-sync-signin
+
+echo "Removing system-wide Chromium sign-in policy..."
+"${SUDO[@]}" rm -f /etc/chromium/policies/managed/zz-google-signin.json
+
+# Remove policy directories only if they are empty.
+"${SUDO[@]}" rmdir /etc/chromium/policies/managed 2>/dev/null || true
+"${SUDO[@]}" rmdir /etc/chromium/policies 2>/dev/null || true
+
+echo
+echo "=================================================="
+echo " Removal complete"
+echo "=================================================="
+echo
+echo "Chromium and all user browser data were left untouched."
