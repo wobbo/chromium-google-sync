@@ -2,7 +2,7 @@
 
 **Version 1.0 — 2026-09-30**
 
-Enable Google account sign-in and Google Sync in native Debian-compatible Chromium without replacing Chromium or installing an extra app manager.
+Enable Google account sign-in and Google Sync in native Debian-compatible Chromium without replacing Chromium or installing an extra app manager. I made it for Chromium Debian 13 GNOME AMD64 PC, ARM64 Raspberry Pi 4, Raspberry Pi 400, Raspberry Pi 5, Raspberry Pi 500 and Raspberry Pi 500+.
 
 This project keeps the distribution-provided Chromium files intact and adds its own configuration under `/etc`.
 
